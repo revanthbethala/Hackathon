@@ -33,7 +33,11 @@ const appRouter = createBrowserRouter([
   },
   {
     path: "/courses",
-    element: (<ProtectedRoute><HeroSection /><Courses /></ProtectedRoute>
+    element: (
+      <ProtectedRoute>
+        <HeroSection />
+        <Courses />
+      </ProtectedRoute>
     )
   },
   {
@@ -91,9 +95,7 @@ const appRouter = createBrowserRouter([
   {
     path: "/mocktest",
     element: (
-      <ProtectedRoute>
-        <MockTest />
-      </ProtectedRoute>
+      <MockTest />
     )
   },
   {

@@ -1,6 +1,7 @@
 // src/components/MockTest.js
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom'; // Import NavLink
 import { setQuestionsShuffled, selectAnswer, nextQuestion, resetTest } from '@/features/mockTestSlice';
 
 const MockTest = () => {
@@ -11,10 +12,7 @@ const MockTest = () => {
       selectedAnswer,
       score,
       showScore,
-      correctDomains,
-      wrongDomains,
    } = useSelector((state) => state.mockTest);
-   console.log(correctDomains, wrongDomains);
 
    // Load questions from the JSON file
    useEffect(() => {
@@ -56,12 +54,21 @@ const MockTest = () => {
                   {score} out of {questions.length}
                </p>
 
-               <button
-                  onClick={() => dispatch(resetTest())}
-                  className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-               >
-                  Retake Test
-               </button>
+               <div className="button-group mt-6 flex justify-center space-x-4">
+                  <button
+                     onClick={() => dispatch(resetTest())}
+                     className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                  >
+                     Retake Test
+                  </button>
+                  {/* Add NavLink to navigate to /course */}
+                  <NavLink
+                     to="/courses"
+                     className="px-6 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+                  >
+                     View Courses
+                  </NavLink>
+               </div>
             </div>
          ) : (
             <div className="question-section">
@@ -75,9 +82,9 @@ const MockTest = () => {
                         key={index}
                         className={`option-button px-4 py-2 border rounded-md mb-2 text-left ${selectedAnswer === option
                            ? option === questions[currentQuestionIndex].correct_option
-                              ? "bg-green-200 border-green-500"
-                              : "bg-red-200 border-red-500"
-                           : "bg-gray-100 hover:bg-gray-200"
+                              ? 'bg-green-200 border-green-500'
+                              : 'bg-red-200 border-red-500'
+                           : 'bg-gray-100 hover:bg-gray-200'
                            }`}
                         onClick={() => handleAnswerClick(option)}
                         disabled={selectedAnswer !== null}
